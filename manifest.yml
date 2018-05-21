@@ -1,0 +1,6 @@
+applications:
+- name: moviefun
+  path: build/libs/moviefun-1.1.0-SNAPSHOT.war
+  services:
+  - movies-mysql
+  - moviefun-s3
