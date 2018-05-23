@@ -1,35 +1,33 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package org.superbiz.moviefun.movies;
+package org.superbiz.moviefun.moviesapi.movies;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
+import java.util.Objects;
 
-@Entity
-public class Movie implements Serializable {
+public class MovieInfo {
 
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MovieInfo movieInfo = (MovieInfo) o;
+        return getId() == movieInfo.getId() &&
+                getYear() == movieInfo.getYear() &&
+                getRating() == movieInfo.getRating() &&
+                Objects.equals(getDirector(), movieInfo.getDirector()) &&
+                Objects.equals(getTitle(), movieInfo.getTitle()) &&
+                Objects.equals(getGenre(), movieInfo.getGenre());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getDirector(), getTitle(), getYear(), getGenre(), getRating());
+    }
 
     private String director;
     private String title;
@@ -37,10 +35,11 @@ public class Movie implements Serializable {
     private String genre;
     private int rating;
 
-    public Movie() {
+    public MovieInfo() {
     }
 
-    public Movie(String title, String director, String genre, int rating, int year) {
+    public MovieInfo(String title, String director, String genre, int rating, int year) {
+
         this.director = director;
         this.title = title;
         this.year = year;
@@ -48,7 +47,7 @@ public class Movie implements Serializable {
         this.rating = rating;
     }
 
-    public Movie(String director, String title, int year) {
+    public MovieInfo(String director, String title, int year) {
         this.director = director;
         this.title = title;
         this.year = year;
@@ -101,4 +100,5 @@ public class Movie implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
 }

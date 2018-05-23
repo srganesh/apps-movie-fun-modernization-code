@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Entity
 public class Album implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 90L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
